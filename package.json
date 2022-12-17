@@ -1,0 +1,25 @@
+{
+  "name": "scrapper_nws",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liamcr21/scrapper_nws.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liamcr21/scrapper_nws/issues"
+  },
+  "homepage": "https://github.com/Liamcr21/scrapper_nws#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "fs": "^0.0.1-security",
+    "node-fetch": "^3.3.0"
+  }
+}

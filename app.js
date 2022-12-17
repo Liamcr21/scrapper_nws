@@ -2,38 +2,48 @@ import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import fs from 'fs';
 
+
 async function getInfoacc(url) {
-  try {
-    const response = await fetch(url);
-    const body = await response.text();
-    
-    const $ = cheerio.load(body);
-    
-    const produit = [];
-    
-    $('.d-grid').children().map((i, el) => {
-      const titre =$(el).find('.card-title').text();
-      const img = $(el).find('img').attr('src');
-      const sale = $(el).find('.badge').text();
-      const lien = 'http://vps-a47222b1.vps.ovh.net:8484' + $(el).find('a').attr('href')
-      produit.push({
-        titre,
-        img,
-        sale,
-        lien
-      });
+    try {
+      const response = await fetch(url);
+      const body = await response.text();
       
-    });
-      
-    fs.writeFile('pageacc.json', JSON.stringify(produit) + ',' , function(err){
-        if (err) return console.log(err);
-       console.log('in pageacc.json');
+      const $ = cheerio.load(body);
+       
+     
+      //const produit = [];
+  
+      $('.d-grid').children().map((i, el) => {
+        const produit = {
+           titre : $(el).find('.card-title').text(),
+           img : $(el).find('img').attr('src'),
+           sale : $(el).find('.badge').text(),
+          lien : 'http://vps-a47222b1.vps.ovh.net:8484' + $(el).find('a').attr('href')
+        };
+        
+        fs.appendFileSync('pageacc.json', JSON.stringify(produit) + ',' , function(err){
+          if (err) return console.log(err);
+        //  console.log('in pageacc.json');
+        });
+       
+        
+        // produit.push({
+          
+        //   titre,
+        //   img,
+        //   sale,
+        //   lien,
+        // });
       });
+        
+      
     
-  } catch (error) {
-    console.log(error);
+     
+      
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
 
 
 

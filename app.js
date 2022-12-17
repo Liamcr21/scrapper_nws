@@ -3,6 +3,10 @@ import fetch from 'node-fetch';
 import fs from 'fs';
 
 
+fs.writeFile('pageacc.json', '[' , function(err){
+    if (err) return console.log(err);
+  });
+
 async function getInfoacc(url) {
     try {
       const response = await fetch(url);
@@ -60,3 +64,16 @@ while(i<8){
 }
 
 
+setTimeout(function () {
+    fs.readFile('pageacc.json', 'utf8', (err, data) => {
+      if (err) throw err;
+    
+      // replace the last character with a new string
+      const newData = data.slice(0, -1) + ']';
+    
+      // write the updated data to the file
+      fs.writeFile('pageacc.json', newData, 'utf8', (err) => {
+        if (err) throw err;
+      });
+    });
+  },1000)

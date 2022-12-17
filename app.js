@@ -2,9 +2,9 @@ import * as cheerio from 'cheerio';
 import fetch from 'node-fetch';
 import fs from 'fs';
 
-async function getInfoacc() {
+async function getInfoacc(url) {
   try {
-    const response = await fetch('http://vps-a47222b1.vps.ovh.net:8484/Product/page/1');
+    const response = await fetch(url);
     const body = await response.text();
     
     const $ = cheerio.load(body);
@@ -35,4 +35,18 @@ async function getInfoacc() {
   }
 }
 
-getInfoacc();
+
+
+
+let url = 'http://vps-a47222b1.vps.ovh.net:8484/Product/page/';
+ let i = 0;
+ let numpage = 1;
+while(i<8){
+   url = 'http://vps-a47222b1.vps.ovh.net:8484/Product/page/' + numpage;
+   getInfoacc(url);
+  i++;
+  numpage++;
+  //console.log(url);
+}
+
+

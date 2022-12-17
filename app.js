@@ -25,7 +25,10 @@ async function getInfoacc() {
       
     });
       
-    console.log(produit);
+    fs.writeFile('pageacc.json', JSON.stringify(produit) + ',' , function(err){
+        if (err) return console.log(err);
+       console.log('in pageacc.json');
+      });
     
   } catch (error) {
     console.log(error);

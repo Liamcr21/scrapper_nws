@@ -18,7 +18,7 @@
         <?php
 
 $host = 'localhost';
-$user = 'liamcrbdd';
+$user = 'root';
 $password = 'liamcrbdd';
 $database = 'scrappernws';
 

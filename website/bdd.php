@@ -10,8 +10,8 @@
     if(isset($_POST['btnproduit']) && isset($_POST['produit'])) {
         // Connection variables
         $host = 'localhost';
-        $user = 'root';
-        $password = '';
+        $user = 'liamcrbdd';
+        $password = 'liamcrbdd';
         $database = 'scrappernws';
 
         // Connect to the database

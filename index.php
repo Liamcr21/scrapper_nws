@@ -1,27 +1,26 @@
 
     <!DOCTYPE html>
-    <html lang="en">
+    <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <title>Boutique </title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" href="style.css">
+    <title>Boutique de Liamcr</title>
   </head>
   <body>
-
-    <h1 class= "display-4">Boutique du rat</h1>
+    <h1 class= "display-4">Boutique de Liamcr</h1>
     <div class="container">
-      <h2 class= "display-4">Produit</h2>
+      <h2 class= "display-4">Produits disponible :</h2>
       <div class="row">
         <?php
+          // ID bdd
+        $host = 'localhost';
+        $user = 'root';
+        $password = '';
+        $database = 'scrappernws';
 
-$host = 'localhost';
-$user = 'root';
-$password = 'liamcrbdd';
-$database = 'scrappernws';
-
+        // Connection bdd
         try {
             $db = new PDO("mysql:host=$host;dbname=$database", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -33,17 +32,17 @@ $database = 'scrappernws';
           $perPage = 16;
           $offset = $perPage * ($page - 1);
           $stmt = $db->query("SELECT * FROM produit LIMIT $offset, $perPage");
-          $items = $stmt->fetchAll();
+          $produits = $stmt->fetchAll();
 
-
-        foreach ($items as $item) : ?>
-          <div class='grid-item'>
-            <div><img src="<?=$item['img']?>" ></div>
-            <diV><h5 class="card-title"><?= $item['titre'] ?></h5></div>
-            <diV><span class="badge bg-success"><?= $item['sale'] ?><span></div>
+// produit venant de la bdd
+        foreach ($produits as $produit) : ?>
+          <div class='produit-grid'>
+            <div><img src="<?=$produit['img']?>" class="img" style="width: 18rem;"></div>
+            <diV><h5 class="card-title"><?= $produit['titre'] ?></h5></div>
+            <diV><span class="badge bg-success"><?= $produit['sale'] ?><span></div>
             <form method="POST" action="article.php">
-              <input type="hidden" name="productId" value="<?= $item['lien'] ?>">
-              <button type = "submit" class="btn btn-primary">Go to Page!</button>
+              <input type="hidden" name="productId" value="<?= $produit['lien'] ?>">
+              <button type = "submit" class="btn btn-primary">Voir le produit !</button>
             </form>
           </div>
           <?php endforeach; ?>
@@ -52,7 +51,7 @@ $database = 'scrappernws';
     </div>
 <ul class= "pagination">
     <?php
-      // Generate the pagination links
+      // Lien de la pagination
       $total = $db->query("SELECT COUNT(*) FROM produit")->fetchColumn();
       $numPages = ceil($total / $perPage);
       for ($i = 1; $i <= $numPages; $i++) {

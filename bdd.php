@@ -1,5 +1,6 @@
+ <!-- FOrmulaire pour envoyez json page acc en bdd -->
 <form method="POST" action="">
-    <input type = "hidden" value= "" name="produit">
+    <input type = "hidden" value= "produitacc" name="produitacc">
     <input type ="submit" name ="btnproduit" value = "Envoyer les produits">
 </form>
 
@@ -7,14 +8,14 @@
 
 <?php
 
-    if(isset($_POST['btnproduit']) && isset($_POST['produit'])) {
-        // Connection variables
+    if(isset($_POST['btnproduit']) && isset($_POST['produitacc'])) {
+        // ID bdd
         $host = 'localhost';
         $user = 'root';
-        $password = 'liamcrbdd';
+        $password = '';
         $database = 'scrappernws';
 
-        // Connect to the database
+        // Connection bdd
         try {
             $db = new PDO("mysql:host=$host;dbname=$database", $user, $password);
             $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -23,14 +24,14 @@
             exit;
         }
 
-        if($_POST['produit']){
-            // Read the contents of the JSON file
-            $json = file_get_contents('../pageacc.json');
+        if($_POST['produitacc'] == "produitacc"){
+            // Json decode
+            $json = file_get_contents('pageacc.json');
             $data = json_decode($json);
 
-            // Insert the data into the database
+            // Insertion donnée json dans bdd
             foreach ($data as $row) {
-                $sql = "INSERT INTO produit (titre, img, sale, lien) VALUES (:value1, :value2, :value3, :value4)";
+                $sql = "INSERT INTO produit (titre,img,sale,lien) VALUES (:value1, :value2, :value3, :value4)";
                 $stmt = $db->prepare($sql);
                 $stmt->execute([
                     'value1' => $row->titre,
@@ -42,3 +43,5 @@
         }
 
     }
+
+

@@ -1,15 +1,17 @@
 
-    <!DOCTYPE html>
-    <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    <link rel="stylesheet" href="style.css">
-    <title>Boutique de Liamcr</title>
-  </head>
+<!doctype html>
+<html lang="fr">
+  <head>
+  	<title>Boutique de Liamcr</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+	<link rel="stylesheet" href="style/styleindex.css">
+	</head>
   <body>
-    <h1 class= "display-4">Boutique de Liamcr</h1>
+    <h1 class= "display-4">Boutique de Liamcr</h1><br>
+    <a href="bdd.php" class="btn btn-primary" role="button">json to bd</a>
     <div class="container">
       <h2 class= "display-4">Produits disponible :</h2>
       <div class="row">
@@ -17,7 +19,7 @@
           // ID bdd
         $host = 'localhost';
         $user = 'root';
-        $password = '';
+        $password = 'liamcrbdd';
         $database = 'scrappernws';
 
         // Connection bdd
